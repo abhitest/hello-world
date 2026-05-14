@@ -25,7 +25,9 @@ export function useBackend() {
     try {
       const token = getAuthToken();
       if (!token) {
-        throw new Error("Not authenticated. Please reconnect your Webflow account.");
+        throw new Error(
+          "Not authenticated. Please reconnect your Webflow account."
+        );
       }
 
       const res = await fetch(`${BACKEND_URL}${path}`, {
@@ -39,7 +41,7 @@ export function useBackend() {
 
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        throw new Error(body.message || `Request failed: ${res.status}`);
+        throw new Error(body.error || body.message || `Request failed: ${res.status}`);
       }
 
       const data = await res.json();
@@ -52,33 +54,65 @@ export function useBackend() {
     }
   };
 
+  // ─── Sites ─────────────────────────────────────────────────
+
+  const getSites = async () => {
+    return request<{ sites: any[] }>("/api/sites");
+  };
+
+  // ─── Usage ─────────────────────────────────────────────────
+
+  const getUsage = async () => {
+    return request<{
+      period: { start: string; end: string };
+      total: { generations: number; tokens: number };
+      breakdown: Array<{ type: string; generations: number; tokens: number }>;
+      limits: { maxGenerations: number; plan: string };
+    }>("/api/usage");
+  };
+
+  // ─── Generate Meta ─────────────────────────────────────────
+
   const generateMeta = async (payload: {
     siteId: string;
     pageIds?: string[];
     collectionId?: string;
     template?: string;
+    keyword?: string;
   }) => {
-    return request("/api/generate/meta", {
+    return request<{ results: any[] }>("/api/generate/meta", {
       method: "POST",
       body: JSON.stringify(payload),
     });
   };
+
+  // ─── Generate Alt Text ─────────────────────────────────────
 
   const generateAltText = async (payload: {
     siteId: string;
-    assetIds: string[];
+    assetIds?: string[];
   }) => {
-    return request("/api/generate/alt-text", {
+    return request<{ results: any[] }>("/api/generate/alt-text", {
       method: "POST",
       body: JSON.stringify(payload),
     });
   };
 
+  // ─── Apply Changes ─────────────────────────────────────────
+
   const applyChanges = async (payload: {
     siteId: string;
-    changes: Array<{ type: "page" | "cms" | "asset"; id: string; data: any }>;
+    changes: Array<{
+      type: "page" | "cms" | "asset";
+      id: string;
+      collectionId?: string;
+      data: any;
+    }>;
   }) => {
-    return request("/api/apply", {
+    return request<{
+      results: Array<{ id: string; type: string; success: boolean; error?: string }>;
+      summary: { total: number; success: number; failed: number };
+    }>("/api/apply", {
       method: "POST",
       body: JSON.stringify(payload),
     });
@@ -87,9 +121,11 @@ export function useBackend() {
   return {
     isLoading,
     error,
+    request,
+    getSites,
+    getUsage,
     generateMeta,
     generateAltText,
     applyChanges,
-    request,
   };
 }

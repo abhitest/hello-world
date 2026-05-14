@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { getAccountFromRequest } from "@/lib/auth";
+import { guardGenerationRoute, validationError } from "@/lib/api-guard";
 import { listPages, listCollectionItems } from "@/lib/webflow";
 import { generateMeta } from "@/lib/openai";
 import { prisma } from "@/lib/prisma";
 
 const requestSchema = z.object({
-  siteId: z.string(),
+  siteId: z.string().min(1, "siteId is required"),
   pageIds: z.array(z.string()).optional(),
   collectionId: z.string().optional(),
   template: z.string().optional(),
@@ -16,16 +16,24 @@ const requestSchema = z.object({
 /**
  * POST /api/generate/meta
  * Generates meta tags for pages or CMS items using AI.
+ * Protected by: auth + rate limit + usage quota.
  */
 export async function POST(request: NextRequest) {
+  // Guard: auth + rate limit + usage quota
+  const guard = await guardGenerationRoute(request);
+  if (!guard.success) return guard.response;
+
+  const { account } = guard;
+
   try {
-    const account = await getAccountFromRequest(request);
-    if (!account) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const body = await request.json();
+    const parsed = requestSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return validationError(parsed.error);
     }
 
-    const body = await request.json();
-    const input = requestSchema.parse(body);
+    const input = parsed.data;
 
     // Load site settings for brand voice
     const site = await prisma.site.findUnique({
@@ -112,7 +120,7 @@ export async function POST(request: NextRequest) {
         accountId: account.id,
         type: "meta_generation",
         count: results.length,
-        tokens: results.length * 350, // rough estimate per generation
+        tokens: results.length * 350,
       },
     });
 
@@ -120,7 +128,7 @@ export async function POST(request: NextRequest) {
   } catch (error: any) {
     console.error("Generate meta error:", error);
     return NextResponse.json(
-      { error: error.message },
+      { error: error.message, code: "GENERATION_FAILED" },
       { status: 500 }
     );
   }

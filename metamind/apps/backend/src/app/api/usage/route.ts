@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAccountFromRequest } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { checkUsageLimit } from "@/lib/stripe";
 
 /**
  * GET /api/usage
@@ -41,6 +42,9 @@ export async function GET(request: NextRequest) {
       },
     });
 
+    // Get plan-based limits
+    const usageLimits = await checkUsageLimit(account.id);
+
     return NextResponse.json({
       period: {
         start: startOfMonth.toISOString(),
@@ -56,9 +60,8 @@ export async function GET(request: NextRequest) {
         tokens: t._sum.tokens || 0,
       })),
       limits: {
-        // TODO: Pull from Stripe subscription tier
-        maxGenerations: 2000,
-        plan: "pro",
+        maxGenerations: usageLimits.limit,
+        plan: usageLimits.plan.toLowerCase(),
       },
     });
   } catch (error: any) {

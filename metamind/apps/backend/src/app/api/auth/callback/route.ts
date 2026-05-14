@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { createToken } from "@/lib/auth";
 
 /**
  * GET /api/auth/callback
  * OAuth callback from Webflow. Exchanges auth code for access token,
- * stores it in the database, and redirects back to the Designer.
+ * stores it in the database, issues a JWT, and redirects back to the Designer.
  */
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -77,12 +78,17 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    // Create a session JWT and redirect back to designer
-    // For MVP, we redirect with a simple token param
+    // Issue a JWT for the Designer Extension
+    const jwt = await createToken({
+      id: account.id,
+      webflowUserId: account.webflowUserId,
+    });
+
+    // Redirect back to designer extension with JWT
     const redirectUrl = new URL(
       process.env.DESIGNER_EXTENSION_URL || "http://localhost:1337"
     );
-    redirectUrl.searchParams.set("token", account.id);
+    redirectUrl.searchParams.set("token", jwt);
     redirectUrl.searchParams.set("status", "connected");
 
     return NextResponse.redirect(redirectUrl.toString());
