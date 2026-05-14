@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id              String   @id @default(cuid())
+  webflowUserId   String   @unique @map("webflow_user_id")
+  accessToken     String   @map("access_token")
+  refreshToken    String?  @map("refresh_token")
+  tokenExpiresAt  DateTime? @map("token_expires_at")
+  email           String?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  sites           Site[]
+  usageRecords    UsageRecord[]
+
+  @@map("accounts")
+}
+
+model Site {
+  id          String   @id @default(cuid())
+  webflowId   String   @unique @map("webflow_id")
+  name        String
+  accountId   String   @map("account_id")
+  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  settings    SiteSettings?
+
+  @@map("sites")
+}
+
+model SiteSettings {
+  id                    String @id @default(cuid())
+  siteId                String @unique @map("site_id")
+  site                  Site   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  brandName             String @default("") @map("brand_name")
+  tone                  String @default("professional")
+  targetKeywords        String @default("") @map("target_keywords")
+  maxTitleLength        Int    @default(60) @map("max_title_length")
+  maxDescriptionLength  Int    @default(155) @map("max_description_length")
+  language              String @default("en")
+
+  @@map("site_settings")
+}
+
+model UsageRecord {
+  id          String   @id @default(cuid())
+  accountId   String   @map("account_id")
+  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  type        String   // "meta_generation" | "alt_text_generation"
+  tokens      Int      @default(0)
+  count       Int      @default(1)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([accountId, createdAt])
+  @@map("usage_records")
+}

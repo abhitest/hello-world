@@ -1,0 +1,11 @@
+{
+  "name": "MetaMind AI",
+  "apiVersion": "2",
+  "size": "comfortable",
+  "publicDir": "dist",
+  "appIntents": {
+    "page": ["read", "write"],
+    "asset": ["read", "write"],
+    "style": ["read"]
+  }
+}

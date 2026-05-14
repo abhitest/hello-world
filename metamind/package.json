@@ -1,0 +1,27 @@
+{
+  "name": "metamind",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI Meta & Alt Text Generator for Webflow — Hybrid App (Designer Extension + Data Client)",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "extension:dev": "npm run dev --workspace=apps/designer-extension",
+    "backend:dev": "npm run dev --workspace=apps/backend"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "npm@10.0.0"
+}

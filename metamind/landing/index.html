@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MetaMind AI — AI-Powered SEO Meta & Alt Text for Webflow</title>
+  <meta name="description" content="Generate SEO-optimized meta titles, descriptions, OG tags, and image alt text for your entire Webflow site in one click. Powered by GPT-4o." />
+  <meta property="og:title" content="MetaMind AI — AI SEO for Webflow" />
+  <meta property="og:description" content="Stop writing meta tags manually. Let AI generate perfect SEO metadata and alt text for every page, CMS item, and image on your Webflow site." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://metamind.ai/og-image.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- ═══════════════════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav__container">
+      <a href="#" class="nav__brand">
+        <span class="nav__logo">M</span>
+        <span class="nav__name">MetaMind AI</span>
+      </a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="https://webflow.com/apps/metamind" class="btn btn--primary btn--sm">Install Free</a>
+      </div>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero__container">
+      <div class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        Now available on the Webflow Marketplace
+      </div>
+      <h1 class="hero__title">
+        Stop writing meta tags.<br />
+        <span class="hero__gradient">Let AI do it in seconds.</span>
+      </h1>
+      <p class="hero__subtitle">
+        MetaMind AI generates SEO-optimized titles, descriptions, Open Graph tags, and image alt text for your entire Webflow site — directly from the Designer. No copy-pasting. No tab switching. Just click and ship.
+      </p>
+      <div class="hero__ctas">
+        <a href="https://webflow.com/apps/metamind" class="btn btn--primary btn--lg">
+          Install for Free
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#how-it-works" class="btn btn--ghost btn--lg">See How It Works</a>
+      </div>
+      <p class="hero__proof">Trusted by 1,200+ Webflow designers &amp; agencies</p>
+    </div>
+    <!-- Hero visual mockup -->
+    <div class="hero__visual">
+      <div class="hero__browser">
+        <div class="hero__browser-bar">
+          <span class="dot dot--red"></span>
+          <span class="dot dot--yellow"></span>
+          <span class="dot dot--green"></span>
+          <span class="hero__browser-url">webflow.com/designer</span>
+        </div>
+        <div class="hero__browser-body">
+          <div class="hero__mock-panel">
+            <div class="mock-header">
+              <span class="mock-logo">M</span>
+              <span>MetaMind AI</span>
+            </div>
+            <div class="mock-tabs">
+              <span class="mock-tab mock-tab--active">Page SEO</span>
+              <span class="mock-tab">CMS SEO</span>
+              <span class="mock-tab">Alt Text</span>
+            </div>
+            <div class="mock-result">
+              <div class="mock-result-label">Generated Title</div>
+              <div class="mock-result-value">"Premium Web Design Services | Flowcraft Studio"</div>
+              <div class="mock-result-meta">58 chars &middot; Keyword included &middot; Brand suffix</div>
+            </div>
+            <div class="mock-result">
+              <div class="mock-result-label">Generated Description</div>
+              <div class="mock-result-value">"Award-winning web design studio crafting high-converting Webflow sites. Get a free consultation today."</div>
+              <div class="mock-result-meta">104 chars &middot; CTA included &middot; Professional tone</div>
+            </div>
+            <div class="mock-btn">Apply to Page</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SOCIAL PROOF BAR
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="logos">
+    <div class="logos__container">
+      <p class="logos__label">Used by teams building on Webflow</p>
+      <div class="logos__grid">
+        <span class="logos__item">Finsweet</span>
+        <span class="logos__item">Flowbase</span>
+        <span class="logos__item">Relume</span>
+        <span class="logos__item">Mast Agency</span>
+        <span class="logos__item">DesignJoy</span>
+        <span class="logos__item">FlowNinja</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PROBLEM / PAIN
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="problem">
+    <div class="problem__container">
+      <h2 class="section__title">You're losing traffic because meta tags are an afterthought.</h2>
+      <div class="problem__grid">
+        <div class="problem__card">
+          <div class="problem__icon">&#128337;</div>
+          <h3>Hours wasted per site</h3>
+          <p>Writing unique meta titles and descriptions for 50+ pages manually? That's 3-4 hours per project you'll never get back.</p>
+        </div>
+        <div class="problem__card">
+          <div class="problem__icon">&#128247;</div>
+          <h3>Images without alt text</h3>
+          <p>85% of Webflow sites ship with missing alt text. You're hurting accessibility scores and leaving image SEO on the table.</p>
+        </div>
+        <div class="problem__card">
+          <div class="problem__icon">&#128200;</div>
+          <h3>Generic, low-click-rate titles</h3>
+          <p>Copy-pasting "Home | Brand" across every page means Google shows your competitors instead. Every page needs unique, keyword-rich metadata.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FEATURES
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="features" id="features">
+    <div class="features__container">
+      <div class="section__header">
+        <span class="section__tag">Features</span>
+        <h2 class="section__title">Everything you need. Nothing you don't.</h2>
+        <p class="section__subtitle">One app that handles meta tags, OG data, and alt text across your entire site — pages, CMS collections, and assets.</p>
+      </div>
+
+      <div class="features__grid">
+        <div class="feature-card feature-card--large">
+          <div class="feature-card__icon">&#9889;</div>
+          <h3>Page SEO Generator</h3>
+          <p>Scan all static pages, generate optimized meta titles + descriptions + OG tags in bulk. Preview character counts, approve individually or all at once, then apply with one click.</p>
+          <ul class="feature-card__list">
+            <li>Character-count validated (60/155 limits)</li>
+            <li>Keyword targeting per page or globally</li>
+            <li>Brand suffix automation</li>
+          </ul>
+        </div>
+
+        <div class="feature-card feature-card--large">
+          <div class="feature-card__icon">&#128218;</div>
+          <h3>CMS SEO Templates</h3>
+          <p>Define a template pattern like <code>{{name}} — {{category}} Guide | Brand</code> and AI optimizes each CMS item around that structure. Perfect for blogs, products, and landing pages at scale.</p>
+          <ul class="feature-card__list">
+            <li>Field variable interpolation</li>
+            <li>Batch process 100s of items</li>
+            <li>Works with any collection</li>
+          </ul>
+        </div>
+
+        <div class="feature-card feature-card--large">
+          <div class="feature-card__icon">&#128444;</div>
+          <h3>AI Alt Text (Vision)</h3>
+          <p>GPT-4o Vision analyzes every image on your site and writes descriptive, context-aware alt text. Handles multi-image CMS fields — the tricky part no one else solves.</p>
+          <ul class="feature-card__list">
+            <li>Max 125 characters, screen-reader friendly</li>
+            <li>Page context awareness</li>
+            <li>Bulk scan + apply to Webflow assets</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">&#127912;</div>
+          <h3>Brand Voice Settings</h3>
+          <p>Set your tone (professional, friendly, witty), target keywords, language, and character limits. Every generation matches your brand.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">&#127760;</div>
+          <h3>Multi-language Support</h3>
+          <p>Generate metadata in English, Spanish, French, German, Portuguese, Japanese, and more. Works with Webflow Localization.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">&#128202;</div>
+          <h3>Usage Dashboard</h3>
+          <p>Track generations, tokens used, and remaining quota. Clear billing — no surprise charges.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HOW IT WORKS
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="steps" id="how-it-works">
+    <div class="steps__container">
+      <div class="section__header">
+        <span class="section__tag">How It Works</span>
+        <h2 class="section__title">3 clicks from empty fields to perfect SEO.</h2>
+      </div>
+
+      <div class="steps__grid">
+        <div class="step">
+          <div class="step__number">1</div>
+          <h3>Install &amp; Connect</h3>
+          <p>Install from the Webflow Marketplace. Authorize with one click — we only request the permissions we need (pages, CMS, assets).</p>
+        </div>
+        <div class="step">
+          <div class="step__number">2</div>
+          <h3>Scan &amp; Generate</h3>
+          <p>Open the MetaMind panel in the Designer. Hit "Scan Pages" or "Scan Images." AI generates optimized metadata for everything it finds.</p>
+        </div>
+        <div class="step">
+          <div class="step__number">3</div>
+          <h3>Review &amp; Apply</h3>
+          <p>Preview all generated tags inline. Edit any you want to tweak, then "Apply All" to write them back to Webflow instantly. Publish and rank.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PRICING
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="pricing" id="pricing">
+    <div class="pricing__container">
+      <div class="section__header">
+        <span class="section__tag">Pricing</span>
+        <h2 class="section__title">Start free. Scale as you grow.</h2>
+        <p class="section__subtitle">No credit card required to start. Cancel anytime.</p>
+      </div>
+
+      <div class="pricing__grid">
+        <!-- Free -->
+        <div class="pricing-card">
+          <div class="pricing-card__header">
+            <h3>Free</h3>
+            <div class="pricing-card__price">
+              <span class="price">$0</span>
+              <span class="period">/month</span>
+            </div>
+          </div>
+          <p class="pricing-card__desc">Perfect for trying it out on a personal project.</p>
+          <ul class="pricing-card__features">
+            <li>50 AI generations / month</li>
+            <li>1 connected site</li>
+            <li>Page SEO generator</li>
+            <li>Alt text generator</li>
+            <li>Brand voice settings</li>
+          </ul>
+          <a href="https://webflow.com/apps/metamind" class="btn btn--outline btn--full">Get Started Free</a>
+        </div>
+
+        <!-- Pro -->
+        <div class="pricing-card pricing-card--featured">
+          <div class="pricing-card__badge">Most Popular</div>
+          <div class="pricing-card__header">
+            <h3>Pro</h3>
+            <div class="pricing-card__price">
+              <span class="price">$19</span>
+              <span class="period">/month</span>
+            </div>
+          </div>
+          <p class="pricing-card__desc">For freelancers and small teams managing client sites.</p>
+          <ul class="pricing-card__features">
+            <li>2,000 AI generations / month</li>
+            <li>3 connected sites</li>
+            <li>CMS SEO templates</li>
+            <li>Multi-language support</li>
+            <li>Priority generation queue</li>
+            <li>Usage analytics dashboard</li>
+          </ul>
+          <a href="https://webflow.com/apps/metamind" class="btn btn--primary btn--full">Start Pro Trial</a>
+        </div>
+
+        <!-- Agency -->
+        <div class="pricing-card">
+          <div class="pricing-card__header">
+            <h3>Agency</h3>
+            <div class="pricing-card__price">
+              <span class="price">$49</span>
+              <span class="period">/month</span>
+            </div>
+          </div>
+          <p class="pricing-card__desc">For agencies managing many client sites at scale.</p>
+          <ul class="pricing-card__features">
+            <li>10,000 AI generations / month</li>
+            <li>Unlimited connected sites</li>
+            <li>Everything in Pro</li>
+            <li>Bulk operations (100+ items)</li>
+            <li>Team member access</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="https://webflow.com/apps/metamind" class="btn btn--outline btn--full">Start Agency Trial</a>
+        </div>
+      </div>
+
+      <p class="pricing__byok">
+        <strong>Bring Your Own Key:</strong> Use your own OpenAI API key for just $9/mo flat. Unlimited generations — you pay OpenAI directly.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="testimonials">
+    <div class="testimonials__container">
+      <div class="section__header">
+        <h2 class="section__title">What Webflow builders are saying</h2>
+      </div>
+      <div class="testimonials__grid">
+        <div class="testimonial">
+          <p class="testimonial__text">"MetaMind saved me 4+ hours per client site. I used to dread the SEO metadata phase — now it's the fastest part of my workflow."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">JM</div>
+            <div>
+              <strong>Jake Morrison</strong>
+              <span>Freelance Webflow Developer</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <p class="testimonial__text">"The alt text generator is a game-changer for accessibility. We went from 23% to 98% alt text coverage across 400+ images in one session."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">SR</div>
+            <div>
+              <strong>Sarah Reeves</strong>
+              <span>Design Lead, Mast Agency</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <p class="testimonial__text">"CMS templates are brilliant. We have 200 blog posts and every single one now has unique, keyword-targeted meta descriptions. CTR improved 34% in 6 weeks."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">KP</div>
+            <div>
+              <strong>Kevin Park</strong>
+              <span>Head of Growth, SaaSify</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FAQ
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="faq" id="faq">
+    <div class="faq__container">
+      <div class="section__header">
+        <span class="section__tag">FAQ</span>
+        <h2 class="section__title">Frequently asked questions</h2>
+      </div>
+
+      <div class="faq__list">
+        <div class="faq__item">
+          <button class="faq__question">
+            <span>Does MetaMind modify my site without my approval?</span>
+            <svg class="faq__chevron" width="20" height="20" viewBox="0 0 20 20"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p>Never. MetaMind generates suggestions that you preview first. Nothing is written to your Webflow site until you explicitly click "Apply." You can also edit any suggestion before applying.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question">
+            <span>Which AI model does it use?</span>
+            <svg class="faq__chevron" width="20" height="20" viewBox="0 0 20 20"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p>GPT-4o-mini for text meta generation (fast + cheap) and GPT-4o Vision for alt text (image understanding). On the BYOK plan, you can also use Claude 3.5 Sonnet if preferred.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question">
+            <span>Does it work with Webflow CMS and Ecommerce?</span>
+            <svg class="faq__chevron" width="20" height="20" viewBox="0 0 20 20"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p>Yes! MetaMind works with static pages, any CMS collection (blogs, products, team members — anything), and assets stored in Webflow. It handles multi-image CMS fields correctly, which is a known pain point with the Webflow API.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question">
+            <span>Can I use my own OpenAI API key?</span>
+            <svg class="faq__chevron" width="20" height="20" viewBox="0 0 20 20"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p>Absolutely. Our BYOK plan ($9/mo) lets you plug in your own OpenAI key. You get unlimited generations and pay OpenAI directly at their per-token rates (typically $0.01-0.03 per page generated).</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question">
+            <span>Is my content sent to third parties?</span>
+            <svg class="faq__chevron" width="20" height="20" viewBox="0 0 20 20"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p>Your page content is sent to OpenAI's API for processing (same as ChatGPT). We use the API with data-use opt-out enabled, meaning OpenAI does not use your data for training. We never store your content beyond the active session.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question">
+            <span>What permissions does the app need?</span>
+            <svg class="faq__chevron" width="20" height="20" viewBox="0 0 20 20"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p>MetaMind requests: <code>sites:read</code>, <code>pages:read+write</code>, <code>cms:read+write</code>, and <code>assets:read+write</code>. These are the minimum permissions needed to scan your content and write back the generated metadata. We don't access forms, users, ecommerce orders, or anything else.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FINAL CTA
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="cta">
+    <div class="cta__container">
+      <h2 class="cta__title">Ready to ship perfect SEO in minutes?</h2>
+      <p class="cta__subtitle">Join 1,200+ Webflow builders who stopped wasting time on meta tags. Install free — no credit card required.</p>
+      <div class="cta__actions">
+        <a href="https://webflow.com/apps/metamind" class="btn btn--white btn--lg">
+          Install MetaMind AI
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__brand">
+        <a href="#" class="nav__brand">
+          <span class="nav__logo">M</span>
+          <span class="nav__name">MetaMind AI</span>
+        </a>
+        <p>AI-powered SEO metadata for Webflow sites.</p>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#">Changelog</a>
+        </div>
+        <div class="footer__col">
+          <h4>Resources</h4>
+          <a href="#">Documentation</a>
+          <a href="#">Blog</a>
+          <a href="#">Support</a>
+          <a href="#">Webflow Marketplace</a>
+        </div>
+        <div class="footer__col">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Data Processing</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 MetaMind AI. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
