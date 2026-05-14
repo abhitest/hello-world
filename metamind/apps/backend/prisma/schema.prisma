@@ -8,17 +8,19 @@ datasource db {
 }
 
 model Account {
-  id              String   @id @default(cuid())
-  webflowUserId   String   @unique @map("webflow_user_id")
-  accessToken     String   @map("access_token")
-  refreshToken    String?  @map("refresh_token")
-  tokenExpiresAt  DateTime? @map("token_expires_at")
-  email           String?
-  createdAt       DateTime @default(now()) @map("created_at")
-  updatedAt       DateTime @updatedAt @map("updated_at")
+  id               String   @id @default(cuid())
+  webflowUserId    String   @unique @map("webflow_user_id")
+  accessToken      String   @map("access_token")
+  refreshToken     String?  @map("refresh_token")
+  tokenExpiresAt   DateTime? @map("token_expires_at")
+  email            String?
+  stripeCustomerId String?  @unique @map("stripe_customer_id")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
 
   sites           Site[]
   usageRecords    UsageRecord[]
+  subscriptions   Subscription[]
 
   @@map("accounts")
 }
@@ -61,4 +63,25 @@ model UsageRecord {
 
   @@index([accountId, createdAt])
   @@map("usage_records")
+}
+
+
+
+model Subscription {
+  id                    String   @id @default(cuid())
+  accountId             String   @map("account_id")
+  account               Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  stripeSubscriptionId  String   @unique @map("stripe_subscription_id")
+  stripeCustomerId      String   @map("stripe_customer_id")
+  stripePriceId         String   @map("stripe_price_id")
+  status                String   // "active" | "trialing" | "past_due" | "canceled" | "incomplete"
+  currentPeriodStart    DateTime @map("current_period_start")
+  currentPeriodEnd      DateTime @map("current_period_end")
+  cancelAtPeriodEnd     Boolean  @default(false) @map("cancel_at_period_end")
+  createdAt             DateTime @default(now()) @map("created_at")
+  updatedAt             DateTime @updatedAt @map("updated_at")
+
+  @@index([accountId])
+  @@index([stripeCustomerId])
+  @@map("subscriptions")
 }
