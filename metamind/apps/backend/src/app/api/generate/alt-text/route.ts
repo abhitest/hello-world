@@ -1,28 +1,36 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { getAccountFromRequest } from "@/lib/auth";
+import { guardGenerationRoute, validationError } from "@/lib/api-guard";
 import { listAssets } from "@/lib/webflow";
 import { generateAltText } from "@/lib/openai";
 import { prisma } from "@/lib/prisma";
 
 const requestSchema = z.object({
-  siteId: z.string(),
+  siteId: z.string().min(1, "siteId is required"),
   assetIds: z.array(z.string()).optional(),
 });
 
 /**
  * POST /api/generate/alt-text
  * Generates alt text for site images using GPT-4o vision.
+ * Protected by: auth + rate limit + usage quota.
  */
 export async function POST(request: NextRequest) {
+  // Guard: auth + rate limit + usage quota
+  const guard = await guardGenerationRoute(request);
+  if (!guard.success) return guard.response;
+
+  const { account } = guard;
+
   try {
-    const account = await getAccountFromRequest(request);
-    if (!account) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const body = await request.json();
+    const parsed = requestSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return validationError(parsed.error);
     }
 
-    const body = await request.json();
-    const input = requestSchema.parse(body);
+    const input = parsed.data;
 
     // List all assets
     const { assets } = await listAssets(account.accessToken, input.siteId);
@@ -46,7 +54,7 @@ export async function POST(request: NextRequest) {
       try {
         const altText = await generateAltText({
           imageUrl: asset.hostedUrl || asset.url,
-          pageContext: "", // Could be enhanced by checking where the image is used
+          pageContext: "",
           maxLength: 125,
         });
 
@@ -83,7 +91,7 @@ export async function POST(request: NextRequest) {
   } catch (error: any) {
     console.error("Generate alt-text error:", error);
     return NextResponse.json(
-      { error: error.message },
+      { error: error.message, code: "GENERATION_FAILED" },
       { status: 500 }
     );
   }
